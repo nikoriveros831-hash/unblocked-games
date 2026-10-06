@@ -1,0 +1,43 @@
+/* NOVA ARCADE ad slots */
+.ad-slot {
+  width: 100%;
+  max-width: 728px;
+  margin: 10px auto;
+  min-height: 60px;
+  border: 1px dashed rgba(0, 240, 255, 0.25);
+  border-radius: 10px;
+  background: rgba(14, 16, 34, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+.ad-slot.has-ad {
+  border-style: solid;
+  border-color: rgba(255, 46, 196, 0.3);
+  background: transparent;
+  min-height: 0;
+}
+.ad-label {
+  font-family: var(--font-family, monospace);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: rgba(0, 240, 255, 0.4);
+  text-transform: uppercase;
+}
+#ad-top { margin-top: 14px; }
+#ad-mid { margin: 18px auto; }
+
+/* floating corner slot */
+.ad-float{
+  position:fixed;bottom:14px;right:14px;width:300px;max-width:88vw;min-height:120px;
+  margin:0;z-index:94;box-shadow:0 10px 34px rgba(0,0,0,.55);border-radius:12px;
+}
+.ad-float .ad-close{
+  position:absolute;top:-11px;right:-11px;width:26px;height:26px;border-radius:50%;
+  border:1px solid rgba(0,240,255,.4);background:#0e0e1c;color:#00f0ff;font-size:15px;
+  line-height:1;cursor:pointer;z-index:2;
+}
+.ad-float .ad-close:hover{border-color:#ff2ec4;color:#ff2ec4}

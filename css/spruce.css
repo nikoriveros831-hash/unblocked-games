@@ -1,0 +1,437 @@
+/* NOVA ARCADE — spruce theme and responsive game browser */
+
+.nova-tagline {
+  max-width: 90vw;
+  margin: 0.5rem auto 1.2rem;
+  color: #ffd23d;
+  font-family: var(--font-family, "Assistant", sans-serif);
+  font-size: 1.05rem;
+  letter-spacing: 0.22em;
+  text-align: center;
+  text-shadow: 0 0 14px rgba(255, 210, 61, 0.45);
+  text-transform: uppercase;
+}
+
+#title::after {
+  display: block;
+  width: 92px;
+  height: 3px;
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, #ffd23d, transparent);
+  box-shadow: 0 0 16px rgba(255, 210, 61, 0.65);
+  content: "";
+}
+
+.gold-badge,
+.ver-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  color: #14131a;
+  background: linear-gradient(135deg, #ffd23d, #ffb900);
+  box-shadow: 0 0 12px rgba(255, 210, 61, 0.5);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.homepage .card:hover {
+  border-color: rgba(255, 210, 61, 0.55);
+}
+
+/* Search controls */
+
+.games .searchbar {
+  position: sticky;
+  top: 10px;
+  z-index: 40;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+
+  width: min(75%, 1400px);
+  box-sizing: border-box;
+  margin-bottom: 16px;
+  padding: 12px 14px;
+
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: 16px;
+  background: rgba(12, 16, 32, 0.82);
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.5),
+    0 0 18px rgba(0, 240, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.games .searchbar input#search {
+  flex: 1 1 260px;
+  min-width: 160px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 10px 14px;
+
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #eef2ff;
+  font-size: 1rem;
+}
+
+.games .searchbar input#search:focus {
+  border-color: rgba(0, 240, 255, 0.7);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+  outline: none;
+}
+
+.games .searchbar select,
+.games .searchbar .randgame,
+.tog {
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #eef2ff;
+  cursor: pointer;
+}
+
+.games .searchbar select,
+.games .searchbar .randgame {
+  width: auto;
+  margin: 0;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+}
+
+.games .searchbar .randgame:hover,
+.tog:hover {
+  border-color: rgba(255, 210, 61, 0.6);
+  color: #ffd23d;
+}
+
+.toggles {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.tog {
+  padding: 9px 12px;
+  color: #9aa7c7;
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: 0.18s ease;
+}
+
+.tog.active {
+  border-color: transparent;
+  background: linear-gradient(135deg, #ffd23d, #f0a500);
+  box-shadow: 0 0 12px rgba(255, 210, 61, 0.4);
+  color: #14131a;
+}
+
+/* Game grid */
+
+#gamesList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  grid-auto-rows: max-content;
+  align-items: start;
+  gap: 14px;
+
+  width: min(75%, 1400px);
+  height: 60vh;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+
+  list-style: none;
+}
+
+#gamesList > li {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
+  padding: 10px;
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  background: #121a33;
+
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+#gamesList > li:hover {
+  z-index: 1;
+  border-color: rgba(0, 240, 255, 0.45);
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.28);
+  transform: translateY(-3px);
+}
+
+/*
+  Standard markup:
+  <li>
+    <img class="thumb" ...>
+    <span class="gname">Game name</span>
+  </li>
+*/
+#gamesList > li > .thumb {
+  display: block;
+
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  flex: 0 0 auto;
+  min-width: 0;
+  box-sizing: border-box;
+  margin: 0 0 8px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9px;
+  background: linear-gradient(135deg, #18233f, #090e1e);
+
+  object-fit: cover;
+  object-position: center;
+}
+
+/*
+  Alternate supported markup:
+  <li>
+    <div class="thumbnail">
+      <img ...>
+    </div>
+  </li>
+*/
+#gamesList > li > .thumb-wrap,
+#gamesList > li > .thumbnail,
+#gamesList > li > .game-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  flex: 0 0 auto;
+  min-width: 0;
+  margin: 0 0 8px;
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9px;
+  background: linear-gradient(135deg, #18233f, #090e1e);
+}
+
+#gamesList > li > .thumb-wrap > img,
+#gamesList > li > .thumbnail > img,
+#gamesList > li > .game-thumb > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+#gamesList > li .gname {
+  display: block;
+  min-width: 0;
+  color: #eef2ff;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+#gamesList > li .star {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+
+  color: #fff;
+  font-size: 1.1rem;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.85);
+}
+
+#gamesList > li:focus-visible {
+  outline: 2px solid rgba(0, 240, 255, 0.8);
+  outline-offset: 2px;
+}
+
+/* List view, if your JavaScript adds .list-mode */
+
+#gamesList.list-mode {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#gamesList.list-mode > li {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+}
+
+#gamesList.list-mode > li > .thumb,
+#gamesList.list-mode > li > .thumb-wrap,
+#gamesList.list-mode > li > .thumbnail,
+#gamesList.list-mode > li > .game-thumb {
+  width: 110px;
+  min-width: 110px;
+  height: 62px;
+  aspect-ratio: auto;
+  flex: 0 0 110px;
+  margin: 0;
+}
+
+#gamesList.list-mode > li .star {
+  position: static;
+  margin-left: auto;
+}
+
+/* Thumbnails toggle */
+
+#gamesList.no-thumbs > li > .thumb,
+#gamesList.no-thumbs > li > .thumb-wrap,
+#gamesList.no-thumbs > li > .thumbnail,
+#gamesList.no-thumbs > li > .game-thumb {
+  display: none;
+}
+
+#gamesList.no-thumbs > li {
+  min-height: 52px;
+  justify-content: center;
+}
+
+/* Floaty mode */
+
+#gamesList.floaty-mode > li {
+  animation: novaFloat 7s ease-in-out infinite;
+  border-color: rgba(255, 210, 61, 0.18);
+  background: rgba(18, 26, 51, 0.72);
+  backdrop-filter: blur(6px);
+}
+
+#gamesList.floaty-mode > li:nth-child(3n + 2) {
+  animation-delay: 1.2s;
+}
+
+#gamesList.floaty-mode > li:nth-child(3n) {
+  animation-delay: 2.4s;
+}
+
+@keyframes novaFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-12px) rotate(1.2deg);
+  }
+}
+
+/* Responsive */
+
+@media (max-width: 640px) {
+  .games .searchbar,
+  #gamesList {
+    width: 92%;
+  }
+
+  .games .searchbar {
+    top: 6px;
+  }
+
+  .toggles {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .tog {
+    flex: 1 1 auto;
+  }
+
+  #gamesList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    height: 55vh;
+  }
+
+  #gamesList > li {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 390px) {
+  #gamesList {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============ AD SLOTS (high-RPM placements, gameneptune/duck.quackprep style) ============ */
+.ad-sidebar {
+  display: none;
+  position: fixed;
+  top: 96px;
+  width: 160px;
+  min-height: 600px;
+  z-index: 5;
+}
+.ad-left  { left: 14px; }
+.ad-right { right: 14px; }
+.ad-sidebar .ad-inner {
+  background: rgba(18, 26, 51, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #5a6a96;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+}
+@media (min-width: 1500px) {
+  .ad-sidebar { display: block; }
+}
+/* top leaderboard + mid divider slots: centered, framed, subtle */
+#ad-top, #ad-mid {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  margin: 6px auto;
+  max-width: 780px;
+}
+/* in-feed ad card inside the game grid (every 12th tile) */
+#gamesList li.ad-infeed {
+  list-style: none;
+  min-height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px dashed rgba(255, 255, 255, 0.14);
+  background: rgba(18, 26, 51, 0.5);
+  color: #5a6a96;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+/* float slot (kept from original, subtle) */
+.ad-float { z-index: 6; }
